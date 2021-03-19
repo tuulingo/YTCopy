@@ -188,7 +188,7 @@
           </v-tooltip>
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
-              <v-icon class="ml-3" v-bind="attrs" v-on="on" @click="">
+              <v-icon class="ml-3" v-bind="attrs" v-on="on">
                 mdi-microphone
               </v-icon>
             </template>
