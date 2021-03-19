@@ -151,30 +151,51 @@
     </v-navigation-drawer>
     
     <v-app-bar :clipped-left="clipped" fixed app dark>
-      <v-btn icon @click.stop="miniVariant = !miniVariant">
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
-      <!-- <v-btn elevation="0"
-              small
-              > -->
-      <v-icon>mdi-youtube</v-icon>
-      <v-toolbar-title v-text="title" />
-      <!-- </v-btn> -->
+       <v-app-bar-nav-icon @click.stop="miniVariant = !miniVariant" />
+      <a class="text-decoration-none white--text" href="/">
+        <v-img
+          class="white--text"
+          width="25"
+          src="https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg"
+          max-height="100px"
+          max-width="300px"
+        >
+        </v-img>
+      </a>
+      <a>
+        <v-toolbar-title class="link text--primary ml-1" v-text="title" />
+      </a>
+      <sup class="grey--text lighten-1">EE</sup>
       <v-spacer />
-      <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
-      <v-text-field
-        flat
-        hide-details
-        append-icon="mdi-magnify"
-        placeholder="Search"
-        outlined
-        dense
-        v-model="searchText"
-        @click:append="search"
-        class="hidden-sm-and-down"
-      ></v-text-field>
+      <v-container>
+        <v-row justify="center">
+          <input
+            class="search-bar--input rounded-0"
+            type="text"
+            placeholder="Otsige"
+          />
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                class="search-bar--button grey--text darken-3 grey rounded-0"
+                v-bind="attrs"
+                v-on="on"
+              >
+                <v-icon>mdi-magnify</v-icon>
+              </v-btn>
+            </template>
+            <span>Otsige</span>
+          </v-tooltip>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon class="ml-3" v-bind="attrs" v-on="on" @click="">
+                mdi-microphone
+              </v-icon>
+            </template>
+            <span>Search with your voice</span>
+          </v-tooltip>
+        </v-row>
+      </v-container>
     </v-app-bar>
     <v-main>
       <v-container>
@@ -203,13 +224,36 @@
   text-decoration: none;
   background-color: none;
 }
-.v-navigation-drawercontent::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 8px;
-  background-color: #212121;
 }
-
-.v-navigation-drawercontent::-webkit-scrollbar-thumb {
-  background: #616161;
+::-webkit-scrollbar-track {
+  background: #363636;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.search-bar--input {
+  width: 30%;
+  min-width: 200px;
+  padding: 1rem;
+  height: 1.7rem;
+  background-color: #121212;
+  color: white;
+  border-width: 0.2px;
+  border-style: solid;
+}
+.search-bar--input:focus {
+  outline: #3ea6ff 1px solid;
+}
+.search-bar--button {
+  height: auto !important;
+  border-width: 1px !important;
+  margin-left: 1px !important;
+  border-style: solid !important;
 }
 </style>
 
