@@ -18,9 +18,9 @@
           >
             <v-list-item-action class="mt-6 pr-2">
               <v-icon class="pb-2 pr-2">{{ miniVariantItem.icon }}</v-icon>
-              <p v-if="style1" class="caption ml-2 pt-6">
+              <!-- <p class="caption ml-2 pt-6">
                 {{ miniVariantItem.title }}
-              </p>
+              </p> -->
             </v-list-item-action>
           </v-list-item>
         </v-list>
@@ -143,8 +143,7 @@
           <a href="http://localhost:3000/" class="link text--secondary caption">Privaatsus</a>
           <a href="http://localhost:3000/" class="link text--secondary mr-9 caption">Eeskirjad ja ohutus</a>
           <a href="http://localhost:3000/" class="link text--secondary caption">Kuidas YouTube toimib?</a>
-          <a href="http://localhost:3000/" class="link text--secondary caption">Proovige uusi funktsioone</a
-          >
+          <a href="http://localhost:3000/" class="link text--secondary caption">Proovige uusi funktsioone</a>
         </div>
         <p class="ml-6 mt-4 body-2 darken" style="color: #757575">© 2021 Google LLC</p>
       </div>
@@ -188,31 +187,111 @@
           </v-tooltip>
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
-              <v-icon class="ml-3" v-bind="attrs" v-on="on">
+              <v-icon class="ml-4" v-bind="attrs" v-on="on">
                 mdi-microphone
               </v-icon>
             </template>
-            <span>Search with your voice</span>
+            <span>Häälotsing</span>
           </v-tooltip>
         </v-row>
       </v-container>
+        <v-tooltip  bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon class="mr-8" v-bind="attrs" v-on="on">
+                mdi-video-plus
+              </v-icon>
+            </template>
+            <span>Märguanded</span>
+          </v-tooltip>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon class="mr-8" v-bind="attrs" v-on="on">
+                mdi-grid
+              </v-icon>
+            </template>
+            <span>YouTube-i rakendused</span>
+          </v-tooltip>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon class="mr-8" v-bind="attrs" v-on="on">
+                mdi-bell
+              </v-icon>
+            </template>
+            <span>Loomine</span>
+          </v-tooltip>
+       <v-menu max-width="400px" offset-y>
+        <template v-slot:activator="{ on, attrs }">
+            <v-avatar color="blue" size="40">
+                  <v-btn color="brown" height="100%" width="100%" rounded v-bind="attrs" v-on="on">
+                    <span class="white--text">OT</span> 
+                  </v-btn>           
+            </v-avatar>        
+        </template>
+        <v-list min-width="300px" max-width="300px" class="pr-4">
+          <v-row class="ml-3 mb-3 mt-4">
+          <v-avatar size="40">
+              <v-btn color="brown" height="100%" width="100%" rounded v-bind="attrs" v-on="on">
+                <span class="white--text">OT</span> 
+              </v-btn>           
+          </v-avatar>
+          <p class="font-weight-bold ml-5">
+            Oliver Tuuling
+          </p>
+          <a href="http://localhost:3000/" class="ml-15 mt-n3 link caption">Google'i konto haldamine</a>
+          </v-row>
+          <v-divider></v-divider>
+          <v-list >
+          <v-list-item
+            v-for="(userItem1, i) in userItems1"
+            :key="i"
+            :to="userItem1.to"
+            router
+            exact
+            class="mb-n1"
+          >
+            <v-list-item-action class="ml-2">
+              <v-icon>{{ userItem1.icon }}</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title class="body-2" v-text="userItem1.title" />
+            </v-list-item-content>
+            <v-icon v-if="userItem1.more === 'true'">{{"mdi-chevron-right"}}</v-icon>
+          </v-list-item>
+        </v-list>
+        <v-divider></v-divider>
+        <v-list >
+          <v-list-item
+            v-for="(userItem2, i) in userItems2"
+            :key="i"
+            :to="userItem2.to"
+            router
+            exact
+            class="mb-n1"
+          >
+            <v-list-item-action class="ml-2">
+              <v-icon>{{ userItem2.icon }}</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title class="body-2" v-text="userItem2.title" />
+            </v-list-item-content>
+            <v-icon v-if="userItem2.more === 'true'">{{"mdi-chevron-right"}}</v-icon>
+          </v-list-item>
+        </v-list>
+        <v-divider></v-divider>
+          <v-list class="mb-n2 ml-5">
+            <v-list-item-action class="ml-2">
+              <v-list-item-title class="body-2">Piiratud režiim: väljas</v-list-item-title>
+            </v-list-item-action>
+            <v-icon class="mt-2 mr-4 float-right">{{"mdi-chevron-right"}}</v-icon>
+          </v-list>
+        </v-list>
+      </v-menu>
     </v-app-bar>
     <v-main>
       <v-container>
         <nuxt />
       </v-container>
     </v-main>
-    <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
-      <v-list>
-        <v-list-item @click.native="right = !right">
-          <v-list-item-action>
-            <v-icon light> mdi-repeat </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-
   </v-app>
 </template>
 
@@ -269,6 +348,105 @@ export default {
       rightDrawer: false,
       title: "YouTube",
       limit: 7,
+      userItems1: [
+        {
+          icon: "mdi-account-box",
+          title: "Teie kanal",
+          to: "/30",
+          more: "false"
+        },
+        {
+          icon: "mdi-currency-usd-circle",
+          title: "Ostud ja liikmesused",
+          to: "/31",
+          more: "false"
+        },
+        {
+          icon: "mdi-youtube-studio",
+          title: "YouTube Studio",
+          to: "/32",
+          more: "false"
+        },
+        {
+          icon: "mdi-account-box-multiple",
+          title: "Vaheta kontot",
+          to: "/33",
+          more: "true"
+        },
+        {
+          icon: "mdi-login-variant",
+          title: "Logi välja",
+          to: "/34",
+          more: "false"
+        },
+      ],
+      userItems2: [
+        {
+          icon: "mdi-theme-light-dark",
+          title: "Välimus: tume",
+          to: "/35",
+          more: "true"
+        },
+        {
+          icon: "mdi-translate",
+          title: "Keel: eesti",
+          to: "/36",
+          more: "true"
+        },
+        {
+          icon: "mdi-earth",
+          title: "Asukoht: Eesti",
+          to: "/37",
+          more: "true"
+        },
+        {
+          icon: "mdi-cog",
+          title: "Seaded",
+          to: "/38",
+          more: "false"
+        },
+        {
+          icon: "mdi-shield-account",
+          title: "Teie andmed YouTube'is",
+          to: "/39",
+          more: "false"
+        },
+                {
+          icon: "mdi-help-circle",
+          title: "Abi",
+          to: "/40",
+          more: "false"
+        },
+        {
+          icon: "mdi-message-alert",
+          title: "Saada tagasisidet",
+          to: "/41",
+          more: "false"
+        },
+        {
+          icon: "mdi-keyboard",
+          title: "Klaviatuuri otseteed",
+          to: "/42",
+          more: "false"
+        },
+      ],
+      nextToUser: [
+        {
+          icon: "mdi-youtube",
+          title: "YouTube Premium",
+          to: "/20",
+        },
+        {
+          icon: "mdi-youtube-gaming",
+          title: "Mängud",
+          to: "/21",
+        },
+        {
+          icon: "mdi-access-point",
+          title: "Otseülekanded",
+          to: "/22",
+        }
+      ],
       moreAbYTItems: [
         {
           icon: "mdi-youtube",

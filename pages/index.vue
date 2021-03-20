@@ -1,5 +1,5 @@
 <template>
-<v-row class="pr-3">
+<v-row class="pl-10 pr-10">
       <v-col v-for="(video, n) in videos" :key="n" cols="3" class="mb-5 pl-8">
         <v-hover v-slot="{ hover }" open-delay="500">
           <div>
